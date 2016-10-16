@@ -26,14 +26,9 @@ class ManageCoursePage extends React.Component {
 
   saveCourse(event) {
     event.preventDefault();
-
-    // if (!this.courseFormIsValid()) {
-    //   return;
-    // }
-
     this.setState({saving: true});
-
     this.props.actions.saveCourse(this.state.course);
+    this.context.router.push('/courses');
   }
 
     render() {
@@ -48,12 +43,6 @@ class ManageCoursePage extends React.Component {
         );
     }
 }
-
-ManageCoursePage.propTypes = {
-    course: PropTypes.object.isRequired,
-    authors: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
-};
 
 function mapStateToProps(state, ownProps) {
     let course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
@@ -76,5 +65,16 @@ function mapDispatchToProps(dispatch) {
         actions: bindActionCreators(courseActions, dispatch)
     };
 }
+
+ManageCoursePage.propTypes = {
+    course: PropTypes.object.isRequired,
+    authors: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired
+};
+
+ManageCoursePage.contextTypes = {
+  router: PropTypes.object
+};
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage);
