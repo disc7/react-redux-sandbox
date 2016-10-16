@@ -44,8 +44,22 @@ class ManageCoursePage extends React.Component {
     }
 }
 
+
+function getCourseById(courses, id) {
+  debugger;
+  const course = courses.filter(course => course.id == id);
+  if (course) return course[0]; //since filter returns an array, have to grab the first.
+  return null;
+}
+
 function mapStateToProps(state, ownProps) {
+    debugger;
+    const courseId = ownProps.params.id;
     let course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+
+    if (courseId && state.courses.length > 0) {
+      course = getCourseById(state.courses, courseId);
+    }
 
     const authorsFormattedForDropdown = state.authors.map(author => {
       return {
