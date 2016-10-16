@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import courseApi from '../api/mockCourseApi'; // When we change to the real API just change to point at the real API
+import {beginAjaxCall} from './ajaxStatusActions';
 
 export function loadCoursesSuccess(courses) {
   return { type: types.LOAD_COURSES_SUCCESS, courses } ; // In ES6 cause the course object name:value match only need to define 1 value for left and right
@@ -15,6 +16,7 @@ export function updateCourseSuccess(course) {
 
 export function loadCourses() {
   return function(dispatch) {
+    dispatch(beginAjaxCall());
     return courseApi.getAllCourses().then(courses => {
       dispatch(loadCoursesSuccess(courses));
     }).catch(error => {
@@ -25,6 +27,7 @@ export function loadCourses() {
 
 export function saveCourse(course) {
   return function (dispatch, getState) {
+    dispatch(beginAjaxCall());
     return courseApi.saveCourse(course).then(savedCourse => {
       course.id ? dispatch(updateCourseSuccess(savedCourse)) :
         dispatch(createCourseSuccess(savedCourse));
