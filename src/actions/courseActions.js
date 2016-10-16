@@ -1,8 +1,8 @@
 import * as types from './actionTypes';
-// import courseApi from '../api/mockCourseApi'; // When we change to the real API just change to point at the real API
+import courseApi from '../api/mockCourseApi'; // When we change to the real API just change to point at the real API
 
-export function loadCoursesSuccess(course) {
-  return { type: type.LOAD_COURSES_SUCCESS, courses } ; // In ES6 cause the course object name:value match only need to define 1 value for left and right
+export function loadCoursesSuccess(courses) {
+  return { type: types.LOAD_COURSES_SUCCESS, courses } ; // In ES6 cause the course object name:value match only need to define 1 value for left and right
 }
 
 function createCourse(course) {
