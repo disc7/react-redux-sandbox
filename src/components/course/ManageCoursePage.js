@@ -17,6 +17,14 @@ class ManageCoursePage extends React.Component {
     this.saveCourse = this.saveCourse.bind(this);
     }
 
+    // Called anytime React thinks that props have changed or anytime React thinks props have changed
+    componentWillReceiveProps(nextProps) {
+      if (this.props.course.id != nextProps.course.id) {
+        // Necessary to populate form when existing course is loaded directly.
+        this.setState({course: Object.assign({}, nextProps.course)});
+      }
+    }
+
     updateCourseState(event) {
       const field = event.target.name;
       let course = this.state.course;
@@ -24,12 +32,12 @@ class ManageCoursePage extends React.Component {
       return this.setState({course: course});
     }
 
-  saveCourse(event) {
-    event.preventDefault();
-    this.setState({saving: true});
-    this.props.actions.saveCourse(this.state.course);
-    this.context.router.push('/courses');
-  }
+    saveCourse(event) {
+      event.preventDefault();
+      this.setState({saving: true});
+      this.props.actions.saveCourse(this.state.course);
+      this.context.router.push('/courses');
+    }
 
     render() {
         return (
@@ -46,7 +54,6 @@ class ManageCoursePage extends React.Component {
 
 
 function getCourseById(courses, id) {
-  debugger;
   const course = courses.filter(course => course.id == id);
   if (course) return course[0]; //since filter returns an array, have to grab the first.
   return null;
