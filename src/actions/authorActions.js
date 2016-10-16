@@ -1,5 +1,5 @@
 /*
-    Action Creator - normally ony returns an object
+    Action Creator - normally only returns an object
     Except with Redux Thunk which returns a function
 */
 
