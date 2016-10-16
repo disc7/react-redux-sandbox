@@ -1,9 +1,3 @@
-/*
-    Action Creator - normally only returns an object
-    Except with Redux Thunk which returns a function
-*/
-
-
 import AuthorApi from '../api/mockAuthorApi';
 import * as types from './actionTypes';
 
